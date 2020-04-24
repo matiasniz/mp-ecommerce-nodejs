@@ -1,8 +1,11 @@
 const mercadopago = require("mercadopago");
+const axios = require("axios");
+
+const access_token =
+  "APP_USR-8196777983571350-031822-2c462f0d08deb2f0b12e1b343176a42c-469485398";
 
 mercadopago.configure({
-  access_token:
-    "APP_USR-8196777983571350-031822-2c462f0d08deb2f0b12e1b343176a42c-469485398",
+  access_token,
 });
 
 const getPreferences = async (image, title, price, unit) => {
@@ -33,9 +36,9 @@ const getPreferences = async (image, title, price, unit) => {
       },
     },
     back_urls: {
-      success: "https://matiasniz-mp-ecommerce-nodejs.herokuapp.com/mp",
-      failure: "https://matiasniz-mp-ecommerce-nodejs.herokuapp.com/mp",
-      pending: "https://matiasniz-mp-ecommerce-nodejs.herokuapp.com/mp",
+      success: "https://matiasniz.com/success",
+      failure: "https://matiasniz.com/failure",
+      pending: "https://matiasniz.com/pending",
     },
     auto_return: "approved",
     payment_methods: {
@@ -45,7 +48,7 @@ const getPreferences = async (image, title, price, unit) => {
       excluded_payment_types: [{ id: "atm" }],
       excluded_payment_methods: [{ id: "amex" }],
     },
-    notification_url: `https://matiasniz-mp-ecommerce-nodejs.herokuapp.com/notificaciones`,
+    notification_url: `https://matiasniz.com/mp/notificaciones`,
     external_reference: "ABCD1234",
   };
 
@@ -60,4 +63,15 @@ const getPreferences = async (image, title, price, unit) => {
     });
 };
 
-module.exports = { getPreferences };
+const getInfoPago = async (id) => {
+  let response = await axios(
+    `https://api.mercadolibre.com/collections/notifications/${id}?access_token=${access_token}`
+  );
+
+  return response.data;
+};
+
+module.exports = {
+  getPreferences,
+  getInfoPago,
+};

@@ -1,0 +1,17 @@
+.mp-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50vh;
+}
+
+.mp-title {
+  font-size: 22px;
+  font-weight: bold;
+}
+.mp-data {
+  font-size: 20px;
+  font-weight: 500;
+}

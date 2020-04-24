@@ -1,0 +1,9 @@
+preference_id=469485398-758bda97-e94e-4590-94c5-6fee1a308b57
+external_reference=ABCD1234
+back_url=https%3A%2F%2Fmatiasniz-mp-ecommerce-nodejs.herokuapp.com%2Fmp%3Fcollection_id%3D6287388517%26collection_status%3Dapproved%26external_reference%3DABCD1234%26payment_type%3Daccount_money%26merchant_order_id%3D1292612641%26preference_id%3D469485398-758bda97-e94e-4590-94c5-6fee1a308b57%26site_id%3DMLA%26processing_mode%3Daggregator%26merchant_account_id%3Dnull
+&payment_id=6287388517
+&payment_status=approved
+&payment_status_detail=accredited
+&merchant_order_id=1292612641
+&processing_mode=aggregator
+&merchant_account_id=
