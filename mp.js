@@ -5,19 +5,17 @@ mercadopago.configure({
     "APP_USR-8196777983571350-031822-2c462f0d08deb2f0b12e1b343176a42c-469485398",
 });
 
-const getPreferences = async (req, res) => {
-  const data = req.body;
-
+const getPreferences = async (image, title, price, unit) => {
   let preference = {
     items: [
       {
         id: "1234",
-        title: "a.nombre",
+        title: title,
         currency_id: "ARS",
-        picture_url: "a.foto",
+        picture_url: image,
         description: "Dispositivo móvil de Tienda e-commerce",
-        quantity: 1,
-        unit_price: 200, // a.precio,
+        quantity: Number(unit),
+        unit_price: Number(price),
       },
     ],
     payer: {
@@ -51,22 +49,14 @@ const getPreferences = async (req, res) => {
     external_reference: "ABCD1234",
   };
 
-  mercadopago.preferences
+  return mercadopago.preferences
     .create(preference)
     .then(async (response) => {
-      console.log(response.body.init_point);
-      global.init_point = response.body.init_point;
-      res
-        .status(200)
-        .send({ mp_url_preference: response.body.init_point })
-        .end();
+      return response.body.id;
     })
     .catch(function (error) {
       console.log({ error });
-      res
-        .status(404)
-        .send({ error: "Error al generar la preferencia de pago." })
-        .end();
+      return "";
     });
 };
 
