@@ -31,4 +31,4 @@ app.use(express.static("assets"));
 
 app.use("/assets", express.static(__dirname + "/assets"));
 
-app.listen(port, () => console.log(`run in http://localhost:${port}`));
+app.listen(port);
