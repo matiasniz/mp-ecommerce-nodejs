@@ -7,7 +7,9 @@ var mp = require("./mp");
 
 var port = process.env.PORT || 3000;
 
-app.engine("handlebars", exphbs());
+var hbs = exphbs.create();
+
+app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
 app.get("/", function (req, res) {
