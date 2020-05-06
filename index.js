@@ -61,22 +61,10 @@ app.get("/pending", async (req, res) => {
 app.post("/mp/notificaciones", async (req, res) => {
   let msg = req.body;
 
-  await sendMail({
-    email: "niz.matias@gmail.com",
-    html: JSON.stringify(msg),
-    to: "niz.matias@gmail.com",
-    subject: "Notificacion de Mercado Pago",
-  });
-
   try {
     if (msg.topic === "payment") {
-      let pago = await getInfoPago(msg.id);
-      await sendMail({
-        email: "niz.matias@gmail.com",
-        html: JSON.stringify(pago),
-        to: "niz.matias@gmail.com",
-        subject: "Notificacion de Mercado Pago",
-      });
+      let pago = await mp.getInfoPago(null, msg.resource);
+
       if (msg.mp_status === "in_process") {
         if (pago.collection.status === "approved") {
           console.log("El pago fue aprobado");

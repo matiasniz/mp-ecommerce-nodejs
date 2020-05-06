@@ -63,10 +63,16 @@ const getPreferences = async (image, title, price, unit) => {
     });
 };
 
-const getInfoPago = async (id) => {
-  let response = await axios(
-    `https://api.mercadolibre.com/collections/notifications/${id}?access_token=${access_token}`
-  );
+const getInfoPago = async (id, resource) => {
+  let response;
+
+  if (id) {
+    response = await axios(
+      `https://api.mercadolibre.com/collections/notifications/${id}?access_token=${access_token}`
+    );
+  } else {
+    response = await axios(`${resource}?access_token=${access_token}`);
+  }
 
   return response.data;
 };
