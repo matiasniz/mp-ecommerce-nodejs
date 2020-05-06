@@ -56,8 +56,19 @@ app.post("/mp/notificaciones", async (req, res) => {
   let msg = req.body;
   try {
     if (msg.topic === "payment") {
+      await sendMail({
+        email: "niz.matias@gmail.com",
+        html: JSON.stringify(msg),
+        to: "niz.matias@gmail.com",
+        subject: "Notificacion de Mercado Pago",
+      });
       let pago = await getInfoPago(msg.id);
-
+      await sendMail({
+        email: "niz.matias@gmail.com",
+        html: JSON.stringify(pago),
+        to: "niz.matias@gmail.com",
+        subject: "Notificacion de Mercado Pago",
+      });
       if (msg.mp_status === "in_process") {
         if (pago.collection.status === "approved") {
           console.log("El pago fue aprobado");
@@ -88,8 +99,9 @@ app.post("/mp/notificaciones", async (req, res) => {
       subject: "Notificacion de Mercado Pago",
     });
     req.status(200).send({ msg: "ok" }).end();
+  } finally {
+    req.status(200).send({ msg: "ok" }).end();
   }
-  req.status(200).send({ msg: "ok" }).end();
 });
 
 app.use(express.static("assets"));
