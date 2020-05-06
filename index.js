@@ -9,6 +9,8 @@ var port = process.env.PORT || 3000;
 
 var baseurl = "https://matiasniz.com";
 
+const sendMail = require("./email");
+
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
 
@@ -59,14 +61,32 @@ app.post("/mp/notificaciones", async (req, res) => {
       if (notaVenta.mp_status === "in_process") {
         if (pago.collection.status === "approved") {
           console.log("El pago fue aprobado");
+          await sendMail({
+            email: "niz.matias@gmail.com",
+            html: "El pago fue aprobado",
+            to: "niz.matias@gmail.com",
+            subject: "Notificacion de Mercado Pago",
+          });
         }
         if (pago.collection.status === "failure") {
           console.log("El pago fue rechazado");
+          await sendMail({
+            email: "niz.matias@gmail.com",
+            html: "El pago fue rechazado",
+            to: "niz.matias@gmail.com",
+            subject: "Notificacion de Mercado Pago",
+          });
         }
       }
     }
   } catch (error) {
     console.log(error);
+    await sendMail({
+      email: "niz.matias@gmail.com",
+      html: JSON.stringify(error),
+      to: "niz.matias@gmail.com",
+      subject: "Notificacion de Mercado Pago",
+    });
   }
   req.status(200).send({ msg: "ok" }).end();
 });
