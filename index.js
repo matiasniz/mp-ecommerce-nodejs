@@ -69,7 +69,7 @@ app.post("/mp/notificaciones", async (req, res) => {
         email: "niz.matias@gmail.com",
         html: JSON.stringify(pago),
         to: "niz.matias@gmail.com",
-        subject: "Notificacion de Mercado Pago",
+        subject: "Notificacion de Mercado Pago - Kit certificacion",
       });
       req.status(200).send({ msg: "ok" }).end();
     }
