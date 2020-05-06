@@ -2,7 +2,7 @@ const mercadopago = require("mercadopago");
 const axios = require("axios");
 
 const access_token =
-  "APP_USR-8196777983571350-031822-2c462f0d08deb2f0b12e1b343176a42c-469485398";
+  "APP_USR-6317427424180639-042414-47e969706991d3a442922b0702a0da44-469485398";
 
 mercadopago.configure({
   access_token,
