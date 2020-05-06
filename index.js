@@ -71,7 +71,7 @@ app.post("/mp/notificaciones", async (req, res) => {
         to: "niz.matias@gmail.com",
         subject: "Notificacion de Mercado Pago - Kit certificacion",
       });
-      req.status(200).send({ msg: "ok" }).end();
+      res.status(200).send({ msg: "ok" }).end();
     }
   } catch (error) {
     console.log(error);
@@ -81,9 +81,9 @@ app.post("/mp/notificaciones", async (req, res) => {
       to: "niz.matias@gmail.com",
       subject: "Notificacion de Mercado Pago",
     });
-    req.status(200).send({ msg: "ok" }).end();
+    res.status(200).send({ msg: "ok" }).end();
   } finally {
-    req.status(200).send({ msg: "ok" }).end();
+    res.status(200).send({ msg: "ok" }).end();
   }
 });
 
