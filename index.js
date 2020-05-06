@@ -1,7 +1,13 @@
 var express = require("express");
 var exphbs = require("express-handlebars");
+var cors = require("cors");
 
 var app = express();
+
+app.use(cors());
+
+app.use(express.urlencoded({ limit: "50mb", extended: false }));
+app.use(express.json({ limit: "50mb" }));
 
 var mp = require("./mp");
 
