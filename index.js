@@ -54,14 +54,16 @@ app.get("/pending", async (req, res) => {
 
 app.post("/mp/notificaciones", async (req, res) => {
   let msg = req.body;
+
+  await sendMail({
+    email: "niz.matias@gmail.com",
+    html: JSON.stringify(msg),
+    to: "niz.matias@gmail.com",
+    subject: "Notificacion de Mercado Pago",
+  });
+
   try {
     if (msg.topic === "payment") {
-      await sendMail({
-        email: "niz.matias@gmail.com",
-        html: JSON.stringify(msg),
-        to: "niz.matias@gmail.com",
-        subject: "Notificacion de Mercado Pago",
-      });
       let pago = await getInfoPago(msg.id);
       await sendMail({
         email: "niz.matias@gmail.com",
