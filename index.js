@@ -58,7 +58,7 @@ app.post("/mp/notificaciones", async (req, res) => {
     if (msg.topic === "payment") {
       let pago = await getInfoPago(msg.id);
 
-      if (notaVenta.mp_status === "in_process") {
+      if (msg.mp_status === "in_process") {
         if (pago.collection.status === "approved") {
           console.log("El pago fue aprobado");
           await sendMail({
@@ -87,6 +87,7 @@ app.post("/mp/notificaciones", async (req, res) => {
       to: "niz.matias@gmail.com",
       subject: "Notificacion de Mercado Pago",
     });
+    req.status(200).send({ msg: "ok" }).end();
   }
   req.status(200).send({ msg: "ok" }).end();
 });
