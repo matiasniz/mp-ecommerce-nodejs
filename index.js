@@ -65,26 +65,13 @@ app.post("/mp/notificaciones", async (req, res) => {
     if (msg.topic === "payment") {
       let pago = await mp.getInfoPago(null, msg.resource);
 
-      if (msg.mp_status === "in_process") {
-        if (pago.collection.status === "approved") {
-          console.log("El pago fue aprobado");
-          await sendMail({
-            email: "niz.matias@gmail.com",
-            html: "El pago fue aprobado",
-            to: "niz.matias@gmail.com",
-            subject: "Notificacion de Mercado Pago",
-          });
-        }
-        if (pago.collection.status === "failure") {
-          console.log("El pago fue rechazado");
-          await sendMail({
-            email: "niz.matias@gmail.com",
-            html: "El pago fue rechazado",
-            to: "niz.matias@gmail.com",
-            subject: "Notificacion de Mercado Pago",
-          });
-        }
-      }
+      await sendMail({
+        email: "niz.matias@gmail.com",
+        html: JSON.stringify(pago),
+        to: "niz.matias@gmail.com",
+        subject: "Notificacion de Mercado Pago",
+      });
+      req.status(200).send({ msg: "ok" }).end();
     }
   } catch (error) {
     console.log(error);
