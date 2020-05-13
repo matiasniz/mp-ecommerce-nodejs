@@ -47,8 +47,6 @@ const getPreferences = async (image, title, price, unit) => {
     auto_return: "approved",
     payment_methods: {
       installments: 6,
-    },
-    payment_methods: {
       excluded_payment_types: [{ id: "atm" }],
       excluded_payment_methods: [{ id: "amex" }],
     },
