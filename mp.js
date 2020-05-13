@@ -34,6 +34,10 @@ const getPreferences = async (image, title, price, unit) => {
         street_number: 123,
         zip_code: "1111",
       },
+      identification: {
+        type: "DNI",
+        number: "22.333.444",
+      },
     },
     back_urls: {
       success: "https://matiasniz.com/success",
